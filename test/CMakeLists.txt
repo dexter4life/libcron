@@ -16,9 +16,9 @@ else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 endif()
 
+find_package(Catch2 3 CONFIG REQUIRED)
+
 include_directories(
-        ${CMAKE_CURRENT_LIST_DIR}/externals/Catch2/single_include/catch2
-        ${CMAKE_CURRENT_LIST_DIR}/../libcron/externals/date/include
         ${CMAKE_CURRENT_LIST_DIR}/..
 )
 
@@ -30,12 +30,12 @@ add_executable(
 	CronTest.cpp)
 
 if(NOT MSVC)
-	target_link_libraries(${PROJECT_NAME} libcron pthread)
+	target_link_libraries(${PROJECT_NAME} libcron Catch2::Catch2WithMain pthread)
 
 	# Assume a modern compiler supporting uncaught_exceptions()
 	target_compile_definitions (${PROJECT_NAME} PRIVATE -DHAS_UNCAUGHT_EXCEPTIONS)
 else()
-	target_link_libraries(${PROJECT_NAME} libcron)
+	target_link_libraries(${PROJECT_NAME} libcron Catch2::Catch2WithMain)
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

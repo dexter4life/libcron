@@ -31,9 +31,12 @@ add_library(${PROJECT_NAME}
 		src/CronSchedule.cpp
 		src/Task.cpp)
 
+find_package(date CONFIG REQUIRED)
+
 target_include_directories(${PROJECT_NAME}
-		PUBLIC ${CMAKE_CURRENT_LIST_DIR}/externals/date/include
 		PUBLIC include)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC date::date date::date-tz)
 
 if(NOT MSVC)
 	# Assume a modern compiler (gcc 9.3)

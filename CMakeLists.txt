@@ -13,5 +13,4 @@ endif()
 
 install(TARGETS libcron DESTINATION lib)
 install(DIRECTORY libcron/include/libcron DESTINATION include)
-install(DIRECTORY libcron/externals/date/include/date DESTINATION include)
 
